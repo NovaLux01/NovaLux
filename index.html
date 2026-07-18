@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaLux - Premium Store</title>
+    <style>
+        /* --- ESTILOS GENERALES Y PALETA DE COLORES (Serio, Limpio y Juvenil) --- */
+        :root {
+            --bg-principal: #f8fafc;       /* Blanco/Grisáceo muy claro y limpio */
+            --bg-tarjeta: #ffffff;         /* Blanco puro */
+            --texto-oscuro: #0f172a;       /* Negro/Azul oscuro profundo */
+            --texto-mutado: #64748b;      /* Gris serio */
+            --azul-juvenil: #0088ff;      /* Azul claro/eléctrico brillante para detalles juveniles */
+            --azul-hover: #0066cc;
+            --borde: #e2e8f0;              /* Gris muy claro para separar con elegancia */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto-oscuro);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER Y NAVEGACIÓN --- */
+        header {
+            background-color: var(--texto-oscuro);
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--azul-juvenil);
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--azul-juvenil);
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* --- SECCIONES --- */
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--azul-juvenil);
+            border-radius: 2px;
+        }
+
+        /* --- REJILLA DE PRODUCTOS (GRID) --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- TARJETA DE PRODUCTO --- */
+        .product-card {
+            background-color: var(--bg-tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            border-color: rgba(0, 136, 255, 0.3);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 280px;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            border-top: 1px solid var(--borde);
+            background-color: #ffffff;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--texto-oscuro);
+            margin-bottom: 0.5rem;
+            min-height: 2.4rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--azul-juvenil);
+            margin-bottom: 1rem;
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            background-color: var(--texto-oscuro);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-buy:hover {
+            background-color: var(--azul-juvenil);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--texto-oscuro);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            font-size: 0.9rem;
+            border-top: 3px solid var(--azul-juvenil);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">Nova<span>Lux</span></div>
+            <nav>
+                <a href="#perfumes">Perfumes</a>
+                <a href="#ropa">Ropa</a>
+                <a href="#tecnologia">Tecnología</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ================= SECCIÓN: PERFUMES ================= -->
+        <section id="perfumes">
+            <h2 class="section-title">Perfumes</h2>
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60" alt="Xerjoff Alexandria 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Xerjoff Alexandria 100ml</h3>
+                        <p class="product-price">$ 850.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop&q=60" alt="Valentino Uomo Intense 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Uomo Intense 100ml</h3>
+                        <p class="product-price">$ 780.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&auto=format&fit=crop&q=60" alt="Xerjoff Erba Pura 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Xerjoff Erba Pura Eau de Parfum 100ml</h3>
+                        <p class="product-price">$ 820.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&auto=format&fit=crop&q=60" alt="Xerjoff Homme Anniversary 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Xerjoff Homme Anniversary 100ml</h3>
+                        <p class="product-price">$ 920.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1588405748373-122b2321bc31?w=500&auto=format&fit=crop&q=60" alt="Coco Mademoiselle 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Coco Mademoiselle Eau de Parfum Intense 100ml</h3>
+                        <p class="product-price">$ 750.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500&auto=format&fit=crop&q=60" alt="Xerjoff Opera">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Xerjoff Opera</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500&auto=format&fit=crop&q=60" alt="Xerjoff StarLight 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Xerjoff StarLight 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=500&auto=format&fit=crop&q=60" alt="Sabrina Carpenter Caramel Dream">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sabrina Carpenter Caramel Dream 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1615655096345-61a54750068d?w=500&auto=format&fit=crop&q=60" alt="Versace Dylan Blue 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Versace Dylan Blue 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1512563973412-fe417aa21cb3?w=500&auto=format&fit=crop&q=60" alt="Jean Paul Gaultier Le Male Elixir">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Jean Paul Gaultier Le Male Elixir</h3>
+                        <p class="product-price">$ 1,500.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=500&auto=format&fit=crop&q=60" alt="Xerjoff Accento Overdose 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Xerjoff Accento Overdose 100ml</h3>
+                        <p class="product-price">$ 1,290.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500&auto=format&fit=crop&q=60" alt="Xerjoff Purple Accento 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Xerjoff Purple Accento Eau de Parfum 100ml</h3>
+                        <p class="product-price">$ 1,290.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1563170351-be82bc888bb4?w=500&auto=format&fit=crop&q=60" alt="212 VIP ROSE">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">212 VIP ROSE</h3>
+                        <p class="product-price">$ 1,300.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop&q=60" alt="Ariana Grande Cloud 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ariana Grande Cloud 100ml</h3>
+                        <p class="product-price">$ 1,000.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&auto=format&fit=crop&q=60" alt="Hawas Black 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hawas Black 100ml</h3>
+                        <p class="product-price">$ 1,000.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&auto=format&fit=crop&q=60" alt="Club de Nuit Intense 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Club de Nuit Intense 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1588405748373-122b2321bc31?w=500&auto=format&fit=crop&q=60" alt="Scandal Jean Paul 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Scandal Jean Paul 100ml</h3>
+                        <p class="product-price">$ 1,000.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500&auto=format&fit=crop&q=60" alt="Versace Eros 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Versace Eros 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&auto=format&fit=crop&q=60" alt="Armaf Odyssey Mandarin Sky 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Armaf Odyssey Mandarin Sky 100ml</h3>
+                        <p class="product-price">$ 1,230.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop&q=60" alt="Valentino Donna Born In Roma Yellow Dream 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Donna Born In Roma Yellow Dream 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&auto=format&fit=crop&q=60" alt="Valentino Donna Eau de Parfum 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Donna Eau de Parfum 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&auto=format&fit=crop&q=60" alt="Valentino Donna Born in Roma Green Stravaganza 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Donna Born in Roma Green Stravaganza 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1588405748373-122b2321bc31?w=500&auto=format&fit=crop&q=60" alt="212 VIP Black NYC">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">212 VIP Black NYC</h3>
+                        <p class="product-price">$ 1,119.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?w=500&auto=format&fit=crop&q=60" alt="Versace Tradicional 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Versace Tradicional 100ml</h3>
+                        <p class="product-price">$ 1,250.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=500&auto=format&fit=crop&q=60" alt="Creed Aventus 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Creed Aventus Eau de Parfum 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=500&auto=format&fit=crop&q=60" alt="Valentino Donna Born in Roma 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Donna Born in Roma Eau de Parfum 100ml</h3>
+                        <p class="product-price">$ 1,158.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1615655096345-61a54750068d?w=500&auto=format&fit=crop&q=60" alt="JPG Scandal Le Parfum 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Jean Paul Gaultier Scandal Le Parfum Pour Homme 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=500&auto=format&fit=crop&q=60" alt="Jean Paul Gaultier 125ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Jean Paul Gaultier 125ml</h3>
+                        <p class="product-price">$ 1,500.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500&auto=format&fit=crop&q=60" alt="Valentino Uomo Born In Roma Green Stravaganza 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Uomo Born In Roma Green Stravaganza 100ml</h3>
+                        <p class="product-price">$ 1,115.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1563170351-be82bc888bb4?w=500&auto=format&fit=crop&q=60" alt="Valentino Born In Roma Donna Intense 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Born In Roma Donna Intense 100ml</h3>
+                        <p class="product-price">$ 1,110.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&auto=format&fit=crop&q=60" alt="Valentino Uomo Born In Roma Intense 100ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Valentino Uomo Born In Roma Intense 100ml</h3>
+                        <p class="product-price">$ 1,200.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&auto=format&fit=crop&q=60" alt="Jean Paul Gaultier Le male 125ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Jean Paul Gaultier Le male 125ml</h3>
+                        <p class="product-price">$ 1,195.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&auto=format&fit=crop&q=60" alt="Yves Saint Laurent Eau De Parfum 100Ml">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Yves Saint Laurent Eau De Parfum 100Ml</h3>
+                        <p class="product-price">$ 1,100.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= SECCIÓN: ROPA ================= -->
+        <section id="ropa">
+            <h2 class="section-title">Ropa</h2>
+            <div class="products-grid">
+
+                <!-- Gorras -->
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&auto=format&fit=crop&q=60" alt="Barbas Hats B-Star Azul">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Barbas Hats "B-Star Azul"</h3>
+                        <p class="product-price">$ 600.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1534215754734-18e55d13ce35?w=500&auto=format&fit=crop&q=60" alt="Barbas Hats BBB Blue">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Barbas Hats "BBB Blue"</h3>
+                        <p class="product-price">$ 930.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1622445262465-2481c4574875?w=500&auto=format&fit=crop&q=60" alt="Barbas Hats Chrome X Natanael Cano">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Barbas Hats "Chrome X Natanael Cano"</h3>
+                        <p class="product-price">$ 1,500.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1576871337622-98d48d435350?w=500&auto=format&fit=crop&q=60" alt="Barbas Hats Crime">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Barbas Hats "Crime"</h3>
+                        <p class="product-price">$ 2,000.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <!-- Playeras -->
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=60" alt="Palm Angels Blue Black">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Palm Angels Blue Black</h3>
+                        <p class="product-price">$ 789.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=500&auto=format&fit=crop&q=60" alt="Hellstar Tees">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hellstar Tees</h3>
+                        <p class="product-price">$ 820.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&auto=format&fit=crop&q=60" alt="Hellstar Tour">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hellstar Tour</h3>
+                        <p class="product-price">$ 820.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1519326844852-704caea5679e?w=500&auto=format&fit=crop&q=60" alt="Hellstar 08">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hellstar 08</h3>
+                        <p class="product-price">$ 820.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format&fit=crop&q=60" alt="Chrome hearts - Hell Hype">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chrome hearts - Hell Hype</h3>
+                        <p class="product-price">$ 750.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&auto=format&fit=crop&q=60" alt="Ami Paris Black">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ami Paris Black</h3>
+                        <p class="product-price">$ 750.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=500&auto=format&fit=crop&q=60" alt="Hellstar Brain Racer Long-Sleeve Tee">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hellstar Brain Racer Long-Sleeve Tee</h3>
+                        <p class="product-price">$ 750.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=500&auto=format&fit=crop&q=60" alt="Hellstar Classic Neutro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hellstar Classic Neutro</h3>
+                        <p class="product-price">$ 689.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=60" alt="Hellstar White/Blue">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hellstar White/Blue</h3>
+                        <p class="product-price">$ 700.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&auto=format&fit=crop&q=60" alt="Amiri Floral Blue/White">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Amiri Floral Blue/White</h3>
+                        <p class="product-price">$ 670.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format&fit=crop&q=60" alt="Amiri Baroque Logo">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Amiri Baroque Logo</h3>
+                        <p class="product-price">$ 699.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= SECCIÓN: TECNOLOGÍA ================= -->
+        <section id="tecnologia">
+            <h2 class="section-title">Tecnología</h2>
+            <div class="products-grid">
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1622445262465-2481c4574875?w=500&auto=format&fit=crop&q=60" alt="Batería MagSafe">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Batería MagSafe Apple</h3>
+                        <p class="product-price">$ 195.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&auto=format&fit=crop&q=60" alt="C-C Set cubo y cable">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">C-C - Set cubo y cable</h3>
+                        <p class="product-price">$ 130.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=60" alt="L-C Set cubo y cable">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">L-C - Set cubo y cable</h3>
+                        <p class="product-price">$ 150.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&auto=format&fit=crop&q=60" alt="JBL FLIP 6">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">JBL FLIP 6</h3>
+                        <p class="product-price">$ 490.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1588449668338-d134224229de?w=500&auto=format&fit=crop&q=60" alt="AirPods 3-GEN">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">AirPods 3-GEN</h3>
+                        <p class="product-price">$ 400.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&auto=format&fit=crop&q=60" alt="APPLE WATCH NIKE SERIES 10">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">APPLE WATCH NIKE SERIES 10</h3>
+                        <p class="product-price">$ 600.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=500&auto=format&fit=crop&q=60" alt="APPLE WATCH ULTRA">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">APPLE WATCH ULTRA</h3>
+                        <p class="product-price">$ 2,000.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&auto=format&fit=crop&q=60" alt="AirPods Max">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">AirPods Max</h3>
+                        <p class="product-price">$ 800.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=500&auto=format&fit=crop&q=60" alt="AirPods 2 Pro -GEN Alta calidad">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">AirPods 2 Pro -GEN (Con cancelación real) ALTA CALIDAD</h3>
+                        <p class="product-price">$ 400.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=60" alt="AirPods 2 Pro Premium">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">AirPods 2 Pro (sin cancelación, caja premium)</h3>
+                        <p class="product-price">$ 300.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" alt="AirPods 4-GEN">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">AirPods 4-GEN (Cancelación real)</h3>
+                        <p class="product-price">$ 520.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe7c98?w=500&auto=format&fit=crop&q=60" alt="AirPods 3 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">AirPods 3 Pro (Cancelación y traductor)</h3>
+                        <p class="product-price">$ 410.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=500&auto=format&fit=crop&q=60" alt="Galaxy Buds 2 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Galaxy Buds 2 Pro</h3>
+                        <p class="product-price">$ 280.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=60" alt="Buds Galaxy 3">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Buds Galaxy 3</h3>
+                        <p class="product-price">$ 400.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1622445262465-2481c4574875?w=500&auto=format&fit=crop&q=60" alt="Cartera MagSafe Apple">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cartera MagSafe Apple</h3>
+                        <p class="product-price">$ 255.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&auto=format&fit=crop&q=60" alt="Beats Studio Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Beats Studio Pro</h3>
+                        <p class="product-price">$ 600.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&auto=format&fit=crop&q=60" alt="Protector para celular iPhone colores">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Protector de Silicona para iPhone (Varios Colores)</h3>
+                        <p class="product-price">$ 250.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=60" alt="Pack inicial Pro 2">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Pack inicial (Pro 2 Cancelación real)</h3>
+                        <p class="product-price">$ 2,000.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&auto=format&fit=crop&q=60" alt="Protector para celular iPhone Transparente">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Protector Clear Case MagSafe para iPhone</h3>
+                        <p class="product-price">$ 290.00</p>
+                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NovaLux Premium Store. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

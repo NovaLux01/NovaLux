@@ -221,7 +221,12 @@
     </header>
 
     <main>
-
+<!-- BARRA DE BÚSQUEDA INTERNA -->
+    <div style="margin-bottom: 3rem; text-align: center;">
+        <input type="text" id="searchInput" placeholder="Buscar producto en NovaLux..." 
+               style="width: 100%; max-width: 500px; padding: 0.8rem 1.2rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 8px; outline: none; transition: border-color 0.3s;"
+               onfocus="this.style.borderColor='#0088ff'" onblur="this.style.borderColor='#e2e8f0'">
+    </div>
         <!-- ================= SECCIÓN: PERFUMES ================= -->
         <section id="perfumes">
             <h2 class="section-title">Perfumes</h2>
@@ -2156,6 +2161,23 @@
     <footer>
         <p>&copy; 2026 NovaLux Premium Store. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- SCRIPT PARA EL BUSCADOR EN TIEMPO REAL -->
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.product-card');
+
+            cards.forEach(card => {
+                const name = card.querySelector('.product-name').textContent.toLowerCase();
+                if (name.includes(filter)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

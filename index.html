@@ -258,7 +258,7 @@
             font-size: 0.9rem;
             border-top: 3px solid var(--azul-juvenil);
         }
-     @media (max-width: 768px) {
+    @media (max-width: 768px) {
     .header-container {
         display: flex;
         flex-direction: column;
@@ -267,36 +267,44 @@
         gap: 0.7rem;
     }
 
-    /* 1. Logo arriba */
+    /* 1. Logo centrado */
     .logo {
         order: 1;
-        margin-bottom: 0.1rem;
     }
 
-    /* 2. Menú de navegación en el centro */
+    /* 2. Menú deslizable horizontalmente */
     nav {
         order: 2;
         width: 100%;
         display: flex;
-        justify-content: space-around; /* Distribuye las 4 opciones de extremo a extremo de forma pareja */
+        justify-content: flex-start; /* Fuerza a que inicie en Perfumes desde el borde izquierdo */
         align-items: center;
-        gap: 0.3rem; /* Espaciado mínimo para aprovechar todo el ancho */
-        padding: 0.2rem 0;
+        gap: 1.5rem; /* Espaciado cómodo entre hipervínculos */
+        overflow-x: auto; /* Mantiene la barra deslizable */
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; /* Desplazamiento fluido en iOS */
+        padding: 0.4rem 0.5rem; /* Margen interno para que ningún texto se pegue al borde */
+    }
+
+    /* Ocultar barra de desplazamiento visual para que sea limpio al deslizar */
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+    nav {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
     nav a {
-        font-size: 0.75rem; /* Tamaños exactos para que quepan "Perfumes Gorras Ropa Tecnología" */
-        white-space: nowrap;
-        text-decoration: none;
-        padding: 0.2rem 0;
+        font-size: 0.9rem;
+        white-space: nowrap; /* Evita que las palabras se rompan */
+        flex-shrink: 0; /* Impide que los enlaces se compriman */
     }
 
-    /* 3. Buscador abajo */
     .header-search {
         order: 3;
         width: 100%;
         max-width: 100%;
-        margin-top: 0.2rem;
     }
 
     .header-search input {

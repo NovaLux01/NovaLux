@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaLux - Premium Store</title>
     <style>
+        .card img, .product-card img {
+  width: 100%;
+  height: 200px; /* Ajusta según el alto que prefieras */
+  object-fit: contain;
+}
+        /* Reemplaza .productos-grid por el nombre exacto de la clase que envuelve a tus tarjetas */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
         /* --- ESTILOS GENERALES Y PALETA DE COLORES (Serio, Limpio y Juvenil) --- */
         :root {
             --bg-principal: #f8fafc;       /* Blanco/Grisáceo muy claro y limpio */
@@ -779,15 +791,6 @@
                     <div class="product-info">
                         <h3 class="product-name">9PM eau de perfum 100ml</h3>
                         <p class="product-price">$ 700.00</p>
-                        <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
-                    </div>
-                </div>
-          
-        
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Hawas Malibu 100ml</h3>
-                        <p class="product-price">$ 950.00</p>
                         <a href="https://wa.me/527443782962" target="_blank" class="btn-buy">Comprar</a>
                     </div>
                 </div>

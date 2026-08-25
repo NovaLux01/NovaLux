@@ -5,7 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaLux - Premium Store</title>
     <style>
-        
+        .destacados-section {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.destacados-section .section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0d1b2a;
+  border-bottom: 3px solid #007bff;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.destacados-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Ajuste responsive para móviles */
+@media (max-width: 768px) {
+  .destacados-grid {
+    grid-template-columns: 1fr;
+  }
+}
     .destacados-section {
   padding: 20px;
 }
@@ -374,10 +401,11 @@
 
     <main>
 
-        <section class="destacados-section">
-  <h2>DESTACADOS</h2>
+        <!-- SECCIÓN DE PRODUCTOS DESTACADOS ALEATORIOS -->
+<section class="destacados-section">
+  <h2 class="section-title">DESTACADOS</h2>
   <div class="destacados-grid" id="destacados-container">
-    <!-- Los productos se insertarán aquí dinámicamente -->
+    <!-- El script insertará los 4 productos aleatorios aquí automáticamente -->
   </div>
 </section>
         
@@ -2569,6 +2597,9 @@
                 }
             });
         });
+    </script>
+
+        <script>
         // 1. Lista general de tus productos disponibles
 const todosLosProductos = [
   { nombre: "Xerjoff Alexandria 100ml", precio: "$ 850.00", img: "https://http2.mlstatic.com/D_NQ_NP_868554-MLA93964742645_102025-O.webp", link: "https://wa.me/527443782962" },

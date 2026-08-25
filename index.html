@@ -5,7 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaLux - Premium Store</title>
     <style>
-        /* Reemplaza .productos-grid por el nombre exacto de la clase que envuelve a tus tarjetas */
+        
+    .destacados-section {
+  padding: 20px;
+}
+
+.destacados-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Transición suave al cambiar de productos */
+.product-card {
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+/* Adaptación a dispositivos móviles */
+@media (max-width: 768px) {
+  .destacados-grid {
+    grid-template-columns: 1fr;
+  }
+}
         /* --- ESTILOS GENERALES Y PALETA DE COLORES (Serio, Limpio y Juvenil) --- */
         :root {
             --bg-principal: #f8fafc;       /* Blanco/Grisáceo muy claro y limpio */
@@ -348,6 +373,14 @@
 </header>
 
     <main>
+
+        <section class="destacados-section">
+  <h2>DESTACADOS</h2>
+  <div class="destacados-grid" id="destacados-container">
+    <!-- Los productos se insertarán aquí dinámicamente -->
+  </div>
+</section>
+        
         <!-- ================= SECCIÓN: PERFUMES ================= -->
         <section id="perfumes">
             <h2 class="section-title">Perfumes</h2>
@@ -2536,6 +2569,49 @@
                 }
             });
         });
+        // 1. Lista general de tus productos disponibles
+const todosLosProductos = [
+  { nombre: "Xerjoff Alexandria 100ml", precio: "$ 850.00", img: "https://http2.mlstatic.com/D_NQ_NP_868554-MLA93964742645_102025-O.webp", link: "https://wa.me/527443782962" },
+  { nombre: "Valentino Uomo Intense 100ml", precio: "$ 780.00", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw5sB2PYAsLGrJyXEOvtRdZVv4bLbpclcFgBGQ5YNvUg&s=10", link: "https://wa.me/527443782962" },
+  { nombre: "Xerjoff Erba Pura 100ml", precio: "$ 820.00", img: "https://cdn.fragrancenet.com/images/photos/1600x1600/345387.jpg", link: "https://wa.me/527443782962" },
+  { nombre: "Xerjoff Homme Anniversary", precio: "$ 920.00", img: "https://i3.s3stores.com/images/MAX/preview_6bd6a6202cc6014b37bc26093aa346a3.jpeg", link: "https://wa.me/527443782962" },
+];
+
+const container = document.getElementById('destacados-container');
+
+// 2. Función para obtener 4 productos aleatorios sin repetir
+function obtenerCuatroAleatorios(lista) {
+  const copia = [...lista];
+  const seleccionados = [];
+  for (let i = 0; i < 4 && copia.length > 0; i++) {
+    const index = Math.floor(Math.random() * copia.length);
+    seleccionados.push(copia.splice(index, 1)[0]);
+  }
+  return seleccionados;
+}
+
+// 3. Función para renderizar los productos en el HTML con efecto de transición
+function actualizarDestacados() {
+  container.classList.add('fade-out');
+
+  setTimeout(() => {
+    const seleccion = obtenerCuatroAleatorios(todosLosProductos);
+    container.innerHTML = seleccion.map(p => `
+      <div class="product-card">
+        <img src="${p.img}" alt="${p.nombre}">
+        <h3>${p.nombre}</h3>
+        <p class="precio">${p.precio}</p>
+        <a href="${p.link}" class="btn-comprar">Comprar</a>
+      </div>
+    `).join('');
+    
+    container.classList.remove('fade-out');
+  }, 400); // Coincide con la duración del CSS fade
+}
+
+// Carga inicial y cambio cada 3 segundos (3000 ms)
+actualizarDestacados();
+setInterval(actualizarDestacados, 3000);
     </script>
 
         </body>

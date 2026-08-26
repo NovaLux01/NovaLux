@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaLux - Premium Store</title>
     <style>
-        /* Layout base para la sección de Destacados */
+    /* --- FIX SECCIÓN DESTACADOS --- */
 .destacados-section {
   max-width: 1200px;
   margin: 30px auto;
@@ -18,72 +18,39 @@
   color: #0b132b;
   margin-bottom: 20px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-/* Grid de 4 columnas en escritorio */
 .destacados-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
-/* Reglas exclusivas para Celular (Forzar 2 columnas x 2 filas) */
+/* Control estricto de las imágenes para que NO desborden */
+.destacados-section .card-img {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.destacados-section .card-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Vista Celular (Layout 2x2 obligatorio) */
 @media (max-width: 768px) {
   .destacados-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  /* Ajustes proporcionales para que quepan 4 tarjetas en la pantalla sin desordenarse */
-  .destacados-section .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
-    overflow: hidden;
+    gap: 12px;
   }
 
   .destacados-section .card-img {
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-  }
-
-  .destacados-section .card-img img {
-    max-height: 100%;
-    width: auto;
-    object-fit: contain;
-  }
-
-  .destacados-section .card-info {
-    padding: 8px;
-    text-align: left;
-  }
-
-  .destacados-section .card h3 {
-    font-size: 0.75rem;
-    line-height: 1.2;
-    margin-bottom: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .destacados-section .precio {
-    font-size: 0.85rem;
-    font-weight: bold;
-  }
-
-  .destacados-section .btn-comprar {
-    width: 100%;
-    padding: 8px 0;
-    font-size: 0.8rem;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
+    height: 140px;
   }
 }
     /* Estructura base para escritorio (4 columnas en horizontal) */
